@@ -6,7 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'contactos.services'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, ContactosService) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -19,6 +19,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'contactos.services']
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+
+    ContactosService.addFakeContacts();
+
   });
 })
 

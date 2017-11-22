@@ -43,7 +43,10 @@ angular.module('starter.controllers', [])
 
 .controller('ContactosCtrl', function($scope, ContactosService) {
 
-  $scope.contactos = ContactosService.all();
+  $scope.$on('$ionicView.enter',function () {
+      console.log('entering view');
+      $scope.contactos = ContactosService.all();
+  })
 
 })
 
@@ -54,13 +57,14 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('NuevoContactoCtrl', function($scope, ContactosService, $ionicLoading, $state) {
+.controller('NuevoContactoCtrl', function(ContactosService, $ionicLoading) {
 
     var vm = this;
 
     var nuevoContacto = {};
 
-    $scope.altaContacto = function () {
+    this.altaContacto = function () {
+
         nuevoContacto.nombre = vm.nombre;
         nuevoContacto.apellidos = vm.apellidos;
         nuevoContacto.comentarios = vm.comentarios;
@@ -75,8 +79,6 @@ angular.module('starter.controllers', [])
             duration: 3000
         }).then(function(){
             console.log("The loading indicator is now displayed");
-            $state.go('app.contactos');
-
         });
 
     }
