@@ -1,0 +1,28 @@
+<ion-view view-title="Alta Contacto">
+  <ion-content>
+
+    <h1>Nuevo Contacto</h1>
+
+    <div class="list">
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Nombre</span>
+        <input type="text" placeholder="Introduce el nombre" ng-model="vm.nombre">
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Apellidos</span>
+        <input type="text" placeholder="Introduce los apellidos" ng-model="vm.apellidos">
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Comentarios</span>
+        <textarea placeholder="..." ng-model="vm.comentarios"></textarea>
+      </label>
+    </div>
+
+    <div class="padding">
+      <button class="button button-block button-positive" ng-click="altaContacto()">
+        Enviar
+      </button>
+    </div>
+
+  </ion-content>
+</ion-view>

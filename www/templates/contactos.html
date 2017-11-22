@@ -1,0 +1,9 @@
+<ion-view view-title="Contactos">
+  <ion-content>
+    <ion-list>
+      <ion-item ng-repeat="contacto in contactos" href="#/app/contactoFicha/{{contacto.id}}">
+        <strong>{{contacto.nombre}}</strong> {{contacto.apellidos}}
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
