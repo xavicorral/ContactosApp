@@ -35,6 +35,7 @@ angular.module('contactos.services', [])
 
             add: function (contacto) {
                 var listaContactos = this.all();
+                contacto.id = listaContactos.length + 1;
                 listaContactos.push(contacto);
                 this.save(listaContactos);
             },

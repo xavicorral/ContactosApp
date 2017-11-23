@@ -20,6 +20,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'contactos.services']
       StatusBar.styleDefault();
     }
 
+
     ContactosService.addFakeContacts();
 
   });

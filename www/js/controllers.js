@@ -44,9 +44,9 @@ angular.module('starter.controllers', [])
 .controller('ContactosCtrl', function($scope, ContactosService) {
 
   $scope.$on('$ionicView.enter',function () {
-      console.log('entering view');
-      $scope.contactos = ContactosService.all();
-  })
+      var contactos = ContactosService.all();
+      $scope.contactos =  contactos;
+  });
 
 })
 
@@ -57,16 +57,22 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('NuevoContactoCtrl', function(ContactosService, $ionicLoading) {
+.controller('NuevoContactoCtrl', function($scope,ContactosService, $ionicLoading) {
 
     var vm = this;
 
     var nuevoContacto = {};
 
+    $scope.$on('$ionicView.enter',function () {
+        vm.nombre = '';
+        vm.apellido = '';
+        vm.comentarios = '';
+    });
+
     this.altaContacto = function () {
 
         nuevoContacto.nombre = vm.nombre;
-        nuevoContacto.apellidos = vm.apellidos;
+        nuevoContacto.apellido = vm.apellido;
         nuevoContacto.comentarios = vm.comentarios;
 
         console.log('dando de alta contacto..');
@@ -81,6 +87,22 @@ angular.module('starter.controllers', [])
             console.log("The loading indicator is now displayed");
         });
 
+    }
+    
+    this.takePhoto = function () {
+
+        console.log(navigator.camera);
+
+        navigator.camera.getPicture(function (imageData) {
+            console.log('foto taken');
+
+            //var image = document.getElementById('myImage');
+            vm.image = "data:image/jpeg;base64," + imageData;
+
+            }, function () {
+            console.log('foto error');
+        },
+         options);
     }
 
 })
