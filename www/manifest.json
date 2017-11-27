@@ -1,7 +1,7 @@
 
 {
-  "name": "My Ionic App",
-  "short_name": "My Ionic App",
+  "name": "Contactos App at Punt Multimedia",
+  "short_name": "Contactos App",
   "start_url": "index.html",
   "display": "standalone",
   "icons": [{

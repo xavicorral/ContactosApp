@@ -16,6 +16,17 @@
         <span class="input-label">Comentarios</span>
         <textarea placeholder="..." ng-model="vm.comentarios"></textarea>
       </label>
+      <label class="item item-input item-stacked-label" ng-show="vm.image !== undefined">
+        <span class="input-label">Foto</span>
+        <img ng-src="{{vm.image}}">
+      </label>
+    </div>
+
+
+    <div class="padding">
+      <button class="button button-block button-energized" ng-click="vm.takePhoto()">
+        Tomar foto
+      </button>
     </div>
 
     <div class="padding">

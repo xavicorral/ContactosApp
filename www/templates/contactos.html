@@ -1,8 +1,14 @@
 <ion-view view-title="Contactos">
   <ion-content>
     <ion-list>
-      <ion-item ng-repeat="contacto in contactos" href="#/app/contactoFicha/{{contacto.id}}">
-        <strong>{{contacto.nombre}}</strong> {{contacto.apellido}}
+      <ion-item ng-repeat="contacto in contactos"  class="item-icon-right">
+        <p>
+          <a href="#/app/contactoFicha/{{contacto.id}}" class="contactoItem">
+            <h2>{{contacto.nombre}}</h2> {{contacto.apellido}}
+          </a>
+        </p>
+
+        <i class="icon ion-minus-circled" ng-click="vm.borrarContacto({{contacto.id}})"></i>
       </ion-item>
     </ion-list>
   </ion-content>

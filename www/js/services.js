@@ -40,6 +40,17 @@ angular.module('contactos.services', [])
                 this.save(listaContactos);
             },
 
+            delete: function (contactoId) {
+                var listaContactos = this.all();
+                var i;
+                for(i=0; i < listaContactos.length; i++) {
+                    if (listaContactos[i].id == contactoId) {
+                        listaContactos.splice(i, 1);
+                    }
+                }
+                this.save(listaContactos);
+            },
+
             addFakeContacts: function () {
                 if(this.all() === []) {
                     this.save(fakeContacts);

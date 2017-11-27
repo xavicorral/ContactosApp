@@ -43,10 +43,20 @@ angular.module('starter.controllers', [])
 
 .controller('ContactosCtrl', function($scope, ContactosService) {
 
+  var vm = this;
+  var contactos;
+
   $scope.$on('$ionicView.enter',function () {
-      var contactos = ContactosService.all();
+      contactos = ContactosService.all();
       $scope.contactos =  contactos;
   });
+
+    vm.borrarContacto = function (contactoId) {
+      console.log('borrando contacto ID: ' + contactoId);
+        ContactosService.delete(contactoId);
+        contactos = ContactosService.all();
+        $scope.contactos =  contactos;
+    }
 
 })
 
@@ -88,21 +98,37 @@ angular.module('starter.controllers', [])
         });
 
     }
-    
+
+
     this.takePhoto = function () {
 
-        console.log(navigator.camera);
+        console.log('contactos: ' + navigator.camera);
+        var options = {
+            quality: 50,
+            destinationType: Camera.DestinationType.DATA_URL,
+            sourceType: Camera.PictureSourceType.CAMERA,
+            encodingType: Camera.EncodingType.JPEG,
+            //mediaType: Camera.MediaType.PICTURE,
+            targetWidth: 300,
+            targetHeight: 300,
+            allowEdit: true,
+            correctOrientation: true  //Corrects Android orientation quirks
+        };
+        console.log('contactos: ' + options);
 
-        navigator.camera.getPicture(function (imageData) {
-            console.log('foto taken');
+        navigator.camera.getPicture(
+            function (imageData) {
+                console.log('contactos: ' + 'foto taken');
+                vm.image = "data:image/jpeg;base64," + imageData;
+                console.log('contactos imageData:' + imageData);
 
-            //var image = document.getElementById('myImage');
-            vm.image = "data:image/jpeg;base64," + imageData;
-
-            }, function () {
-            console.log('foto error');
-        },
-         options);
+            },
+            function (error) {
+                console.log('contactos: foto error');
+                console.log('contactos: ' +  error);
+            },
+            options
+        );
     }
 
 })

@@ -39,7 +39,7 @@ Now you can install the created .apk doing:
 
 Remember to first delete the old one!
 
-> adb uninstall org.puntmultimedia.$APP_NAME
+> adb uninstall org.puntmultimedia.contactos
 
 To see all packages installed:
 

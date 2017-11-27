@@ -41,7 +41,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'contactos.services']
     views: {
       'menuContent': {
         templateUrl: 'templates/contactos.html',
-        controller: 'ContactosCtrl'
+        controller: 'ContactosCtrl',
+          controllerAs: 'vm'
       }
     }
   })
@@ -52,6 +53,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'contactos.services']
       'menuContent': {
         templateUrl: 'templates/contacto.html',
         controller: 'ContactoFichaCtrl'
+
       }
     }
   })
