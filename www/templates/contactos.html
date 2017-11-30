@@ -1,7 +1,21 @@
 <ion-view view-title="Contactos">
   <ion-content>
+
+    <div class="contactoSearcher">
+      <input class="contactoTextField" type="text" placeholder="e.g., xavi" ng-model="vm.search">
+    </div>
+
+    <div class="contactoRadioSearcher">
+      <div class="contactoRatioText">Ordenar por:</div>
+      <ion-radio ng-model="vm.orden" ng-value="'nombre'">Nombre</ion-radio>
+      <ion-radio ng-model="vm.orden" ng-value="'apellido'">Apellido</ion-radio>
+    </div>
+
     <ion-list>
-      <ion-item ng-repeat="contacto in contactos"  class="item-icon-right">
+      <ion-item ng-repeat="contacto in vm.contactos | filter:vm.search | orderBy: vm.orden"  class="item-icon-left item-icon-right">
+
+        <i class="icon ion-image" ng-show="{{contacto.photoTaken}}"></i>
+
         <p>
           <a href="#/app/contactoFicha/{{contacto.id}}" class="contactoItem">
             <h2>{{contacto.nombre}}</h2> {{contacto.apellido}}
@@ -9,6 +23,7 @@
         </p>
 
         <i class="icon ion-minus-circled" ng-click="vm.borrarContacto({{contacto.id}})"></i>
+
       </ion-item>
     </ion-list>
   </ion-content>

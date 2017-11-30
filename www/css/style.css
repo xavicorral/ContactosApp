@@ -2,3 +2,48 @@
 .contactoItem  {
     text-decoration: none;
 }
+
+.contactoSearcher{
+    width: 100%;
+    margin-top: 10px;
+}
+.contactoTextField {
+    border: 1px solid #ccc !important;
+    border-radius: 6px;
+    padding-left: 47px !important;
+    width: 300px;
+    margin: 0 auto;
+    color: #444a5a !important;
+    font-weight: 300;
+    background: #fff url(/img/search.png) no-repeat scroll 11px 6px;
+
+}
+
+.contactoRadioSearcher .item-radio .item-content {
+    position: relative;
+    z-index: 2;
+    padding: 5px 49px 5px 16px;
+    border: none;
+    background-color: #fff;
+}
+
+.contactoRadioSearcher .item-radio .radio-icon{
+    padding: 0px 6px 0px 0px;
+}
+
+.textNuevoContacto {
+    text-align: center;
+    padding: 5px;
+}
+
+.fotoImg {
+    display: block;
+    margin: 0 auto;
+}
+
+.contactoRatioText {
+    margin-top: 10px;
+}
+.contactoRadioSearcher {
+    margin: 5px 25px 20px 25px;
+}

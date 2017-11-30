@@ -1,7 +1,7 @@
-<ion-view view-title="Alta Contacto">
+<ion-view view-title="Nuevo Contacto">
   <ion-content>
 
-    <h1>Nuevo Contacto</h1>
+    <h2 class="textNuevoContacto">Alta Contacto</h2>
 
     <div class="list">
       <label class="item item-input item-stacked-label">
@@ -16,12 +16,17 @@
         <span class="input-label">Comentarios</span>
         <textarea placeholder="..." ng-model="vm.comentarios"></textarea>
       </label>
-      <label class="item item-input item-stacked-label" ng-show="vm.image !== undefined">
-        <span class="input-label">Foto</span>
-        <img ng-src="{{vm.image}}">
-      </label>
+
     </div>
 
+    <div class="card" ng-show="vm.photoTaken">
+      <div class="item item-text-wrap">
+        <div class="fotoText">Foto</div>
+        <div >
+          <img ng-src="{{vm.imagen}}" alt="Contact photo" class="fotoImg">
+        </div>
+      </div>
+    </div>
 
     <div class="padding">
       <button class="button button-block button-energized" ng-click="vm.takePhoto()">

@@ -41,21 +41,35 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('ContactosCtrl', function($scope, ContactosService) {
+.controller('ContactosCtrl', function($scope, $ionicPopup, ContactosService) {
 
   var vm = this;
   var contactos;
 
-  $scope.$on('$ionicView.enter',function () {
-      contactos = ContactosService.all();
-      $scope.contactos =  contactos;
-  });
+
+    $scope.$on('$ionicView.beforeEnter',function () {
+        vm.contactos = ContactosService.all();
+        console.log('indx: ' + ContactosService.getIndexContactos());
+    });
+
 
     vm.borrarContacto = function (contactoId) {
-      console.log('borrando contacto ID: ' + contactoId);
-        ContactosService.delete(contactoId);
-        contactos = ContactosService.all();
-        $scope.contactos =  contactos;
+        console.log('borrando contacto ID: ' + contactoId);
+
+        var confirmPopup = $ionicPopup.confirm({
+            title: 'Borrar Contacto',
+            template: 'Seguro que deseas borrar el contacto?'
+        });
+
+        confirmPopup.then(function(res) {
+            if(res) {
+                console.log('You are sure');
+                ContactosService.delete(contactoId);
+                vm.contactos =  ContactosService.all();
+            } else {
+                console.log('You are not sure');
+            }
+        });
     }
 
 })
@@ -67,7 +81,7 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('NuevoContactoCtrl', function($scope,ContactosService, $ionicLoading) {
+.controller('NuevoContactoCtrl', function($scope, $state, ContactosService, CameraService, $ionicLoading, $ionicHistory) {
 
     var vm = this;
 
@@ -77,13 +91,17 @@ angular.module('starter.controllers', [])
         vm.nombre = '';
         vm.apellido = '';
         vm.comentarios = '';
+        vm.imagen = '';
+        vm.photoTaken = false;
     });
 
-    this.altaContacto = function () {
+    vm.altaContacto = function () {
 
         nuevoContacto.nombre = vm.nombre;
         nuevoContacto.apellido = vm.apellido;
         nuevoContacto.comentarios = vm.comentarios;
+        nuevoContacto.photoTaken = vm.photoTaken;
+        nuevoContacto.imagen = vm.imagen;
 
         console.log('dando de alta contacto..');
         console.log(nuevoContacto);
@@ -95,39 +113,29 @@ angular.module('starter.controllers', [])
             duration: 3000
         }).then(function(){
             console.log("The loading indicator is now displayed");
+            $ionicHistory.nextViewOptions({
+                disableBack: true
+            });
+            $state.go('app.contactos');
         });
 
     }
 
 
-    this.takePhoto = function () {
+    vm.takePhoto = function () {
+        var photoPromise = CameraService.getPicture();
 
-        console.log('contactos: ' + navigator.camera);
-        var options = {
-            quality: 50,
-            destinationType: Camera.DestinationType.DATA_URL,
-            sourceType: Camera.PictureSourceType.CAMERA,
-            encodingType: Camera.EncodingType.JPEG,
-            //mediaType: Camera.MediaType.PICTURE,
-            targetWidth: 300,
-            targetHeight: 300,
-            allowEdit: true,
-            correctOrientation: true  //Corrects Android orientation quirks
-        };
-        console.log('contactos: ' + options);
-
-        navigator.camera.getPicture(
-            function (imageData) {
-                console.log('contactos: ' + 'foto taken');
-                vm.image = "data:image/jpeg;base64," + imageData;
-                console.log('contactos imageData:' + imageData);
-
+        photoPromise.then(
+            function (data) {
+                console.log('Photo taken!');
+                vm.photoTaken = true;
+                vm.imagen = data;
             },
             function (error) {
-                console.log('contactos: foto error');
-                console.log('contactos: ' +  error);
-            },
-            options
+                console.log('algo ha ido mal');
+                console.log(error);
+            }
+
         );
     }
 

@@ -20,9 +20,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'contactos.services']
       StatusBar.styleDefault();
     }
 
-
-    ContactosService.addFakeContacts();
-
   });
 })
 
@@ -49,6 +46,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'contactos.services']
 
   .state('app.contacto', {
     url: '/contactoFicha/:contactoId',
+    cache: false,
     views: {
       'menuContent': {
         templateUrl: 'templates/contacto.html',

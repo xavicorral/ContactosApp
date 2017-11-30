@@ -16,7 +16,7 @@ echo "${GREY}"
 echo "Signing app $APP_NAME..."
 
 echo "${LIGHT_GREY}"
-jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore stuff/keys/contactos-key.keystore platforms/android/build/outputs/apk/android-release-unsigned.apk contactos
+echo "1234abcd" | jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore stuff/keys/contactos-key.keystore platforms/android/build/outputs/apk/android-release-unsigned.apk contactos
 echo "${GREY}"
 
 echo "Optimizing app $APP_NAME..."
@@ -45,8 +45,17 @@ To see all packages installed:
 
 > adb shell pm list packages | grep 'puntmultimedia'
 
+To debug app:
+
+> adb logcat | grep contactos
+
 "
 
 echo "${GREEN}"
 echo "$MESSAGE"
 echo "${NC}"
+
+adb uninstall org.puntmultimedia.contactos
+
+adb install stuff/out/$APP_NAME.apk
+

@@ -2,7 +2,7 @@
   <ion-content>
     <div class="list card">
 
-      <div class="item item-avatar">
+      <div class="item">
         <h2>{{contacto.nombre}}</h2>
         <p>{{contacto.apellido}}</p>
       </div>
@@ -13,5 +13,10 @@
         </p>
       </div>
 
-    </div>  </ion-content>
+      <div class="item" ng-if="contacto.photoTaken">
+        <img ng-src="{{contacto.imagen}}" class="fotoImg">
+      </div>
+
+    </div>
+  </ion-content>
 </ion-view>
