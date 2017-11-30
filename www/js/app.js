@@ -20,6 +20,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'contactos.services']
       StatusBar.styleDefault();
     }
 
+    if ( typeof window.localStorage['indexContactos'] == 'undefined') {
+        window.localStorage['indexContactos'] = 1;
+    }
+
   });
 })
 

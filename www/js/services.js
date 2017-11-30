@@ -13,8 +13,6 @@ angular.module('contactos.services', [])
             { nombre: 'Esteve', apellido: 'Escolà', comentarios: 'Alumno', id: 3 }
         ];
 
-        var indexContactos = 0;
-
         var metodos = {
 
             all: function () {
@@ -24,9 +22,7 @@ angular.module('contactos.services', [])
                     return angular.fromJson(listaContactos)
                 } else {
                     console.log('no contacts yet...');
-                    this.save(fakeContacts);
-                    indexContactos = fakeContacts.length + 1;
-                    return fakeContacts;
+                    return [];
                 }
             },
 
@@ -45,7 +41,10 @@ angular.module('contactos.services', [])
 
             add: function (contacto) {
                 var listaContactos = this.all();
-                contacto.id = indexContactos++;
+                var indexContactos =  parseInt(window.localStorage['indexContactos']);
+                contacto.id = indexContactos;
+                indexContactos++;
+                window.localStorage['indexContactos'] = indexContactos;
                 listaContactos.push(contacto);
                 this.save(listaContactos);
             },
@@ -71,6 +70,7 @@ angular.module('contactos.services', [])
     })
 
     .factory('CameraService', function($q, AvatarImg) {
+
         var metodos = {
 
             getPicture: function () {
@@ -115,8 +115,6 @@ angular.module('contactos.services', [])
             }
 
         }
-
-
 
         return metodos;
     })
