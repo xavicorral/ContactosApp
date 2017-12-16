@@ -47,3 +47,23 @@
 .contactoRadioSearcher {
     margin: 5px 25px 20px 25px;
 }
+
+.mapContainer{
+    padding:10px;
+}
+
+.positionFound {
+    color: green;
+}
+.positionNotFound {
+    color: red;
+}
+
+#map {
+    height: 100%;
+    width: 100%;
+}
+
+.scroll {
+    height: 100%;
+}

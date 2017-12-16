@@ -29,8 +29,13 @@ plugins/android.json
 plugins/ios.json
 stuff/out
 
+www/lib
+
 $RECYCLE.BIN/
 
 .DS_Store
 Thumbs.db
 UserInterfaceState.xcuserstate
+
+/www/css/ionic.app.css
+/www/css/ionic.app.min.css

@@ -49,7 +49,7 @@ angular.module('starter.controllers', [])
 
     $scope.$on('$ionicView.beforeEnter',function () {
         vm.contactos = ContactosService.all();
-        console.log('indx: ' + ContactosService.getIndexContactos());
+        //console.log('indx: ' + ContactosService.getIndexContactos());
     });
 
 
@@ -140,4 +140,50 @@ angular.module('starter.controllers', [])
     }
 
 })
+
+.controller('MapCtrl', function($scope,$ionicPopup,$timeout,$cordovaGeolocation) {
+
+    var vm = this;
+    vm.positionFound = false;
+
+    var posOptions = {timeout: 10000, enableHighAccuracy: false};
+    $cordovaGeolocation
+        .getCurrentPosition(posOptions)
+        .then(function (position) {
+            console.log(position);
+            vm.latitude = position.coords.latitude;
+            vm.longitude = position.coords.longitude;
+            vm.positionFound = true;
+
+            getMap(position.coords.latitude, position.coords.longitude);
+
+        }, function(err) {
+            // error
+        });
+
+    function getMap(latitude, longitude) {
+
+        console.log('getting map');
+        var mapOptions = {
+            center: new google.maps.LatLng(0, 0),
+            zoom: 1,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+
+        var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+        $scope.map = map;
+
+        var latLong = new google.maps.LatLng(latitude, longitude);
+
+        var marker = new google.maps.Marker({
+            position: latLong
+        });
+
+        marker.setMap(map);
+        map.setZoom(15);
+        map.setCenter(marker.getPosition());
+    }
+
+})
+
 ;

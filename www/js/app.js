@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'contactos.services'])
+angular.module('starter', ['ionic','ngCordova', 'starter.controllers', 'contactos.services'])
 
 .run(function($ionicPlatform, ContactosService) {
   $ionicPlatform.ready(function() {
@@ -66,6 +66,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'contactos.services']
           'menuContent': {
               templateUrl: 'templates/nuevoContacto.html',
               controller: 'NuevoContactoCtrl',
+              controllerAs: 'vm'
+          }
+      }
+  })
+
+  .state('app.map', {
+      url: '/map',
+      views: {
+          'menuContent': {
+              templateUrl: 'templates/map.html',
+              controller: 'MapCtrl',
               controllerAs: 'vm'
           }
       }
